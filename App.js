@@ -1,6 +1,6 @@
 import React from "react";
 import {StatusBar} from "react-native";
-import Hello from "./components/hello";
+import MovieCard from "./components/MovieCard";
 import styled from 'styled-components';
 
 export default function App() {
@@ -9,9 +9,17 @@ export default function App() {
     <Main>
       <StatusBar hidden/>
       <Navbar>
-        <AppName>PCMOB Player</AppName>
+        <AppName>Movie App</AppName>
         <Avatar/>
       </Navbar>
+
+      <MovieContainer>
+        <MovieCard></MovieCard>
+        <MovieCard></MovieCard>
+        <MovieCard></MovieCard>
+        <MovieCard></MovieCard>
+      </MovieContainer>
+      
     </Main>
   );
 }
@@ -46,3 +54,8 @@ margin-top: 10px;
 margin-left: 10px;
 `;
 
+
+const MovieContainer = styled.View`
+margin-top: 10px;
+margin-left: 10px;
+`;
