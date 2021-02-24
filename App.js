@@ -1,5 +1,5 @@
 import React from "react";
-import {StatusBar} from "react-native";
+import {StatusBar, ScrollView} from "react-native";
 import MovieCard from "./components/MovieCard";
 import styled from 'styled-components';
 
@@ -7,19 +7,24 @@ export default function App() {
   return (
 
     <Main>
+
       <StatusBar hidden/>
       <Navbar>
         <AppName>Movie App</AppName>
         <Avatar/>
       </Navbar>
 
-      <MovieContainer>
-        <MovieCard></MovieCard>
-        <MovieCard></MovieCard>
-        <MovieCard></MovieCard>
-        <MovieCard></MovieCard>
-      </MovieContainer>
-      
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <MovieContainer>
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <MovieCard image = "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"/>
+          <MovieCard image = "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"/>
+          <MovieCard image = "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"/>
+          <MovieCard image = "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"/>
+          </ScrollView>
+        </MovieContainer>        
+      </ScrollView>
+
     </Main>
   );
 }
@@ -57,5 +62,5 @@ margin-left: 10px;
 
 const MovieContainer = styled.View`
 margin-top: 10px;
-margin-left: 10px;
+margin-left: 0px;
 `;

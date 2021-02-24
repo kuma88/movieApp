@@ -16,7 +16,7 @@ export default class MovieCard extends React.Component {
     render() {
         return (
           <Container>
-            <Image source={{ uri: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"}} />
+            <Image source={{ uri: this.props.image}} />
           </Container>
 
         )
@@ -25,11 +25,12 @@ export default class MovieCard extends React.Component {
 
 
 const Container = styled.View`
-width: 250px;
-height: 190px;
+width: 380px;
+height: 230px;
 border-radius: 5px;
 background: white;
 overflow: hidden;
+margin-left: 5px;
 `;
 
 const Image = styled.Image`
