@@ -10,17 +10,21 @@ export default function App() {
 
       <StatusBar hidden/>
       <Navbar>
-        <AppName>Movie App</AppName>
+        <AppName>WatchFlix</AppName>
         <Avatar/>
       </Navbar>
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <MovieContainer>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <MovieCard image = "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"/>
-          <MovieCard image = "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"/>
-          <MovieCard image = "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"/>
-          <MovieCard image = "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"/>
+            {
+              MovieCardData.map((data, index) => {
+
+                return <MovieCard key={index} image={data.image}/>;
+
+              })
+            }
+
           </ScrollView>
         </MovieContainer>        
       </ScrollView>
@@ -53,7 +57,7 @@ right: 10px;
 `;
 
 const AppName = styled.Text`
-color: black;
+color: red;
 font-size: 30px;
 margin-top: 10px;
 margin-left: 10px;
@@ -64,3 +68,16 @@ const MovieContainer = styled.View`
 margin-top: 10px;
 margin-left: 0px;
 `;
+
+
+const MovieCardData = [
+  {
+    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"
+  },
+  {
+    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"
+  },
+  {
+    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg"
+  }
+]
