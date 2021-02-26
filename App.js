@@ -2,6 +2,7 @@ import React from "react";
 import {StatusBar, ScrollView} from "react-native";
 import MovieCard from "./components/MovieCard";
 import styled from 'styled-components';
+import PotraitCard from "./components/PortraitCard";
 
 export default function App() {
   return (
@@ -26,7 +27,35 @@ export default function App() {
             }
 
           </ScrollView>
-        </MovieContainer>        
+        </MovieContainer>
+        <Text>Continue Watching</Text>   
+
+        <PortraitContainer >
+            <ScrollView horizontal={true}>
+              <PotraitCard></PotraitCard>
+              <PotraitCard></PotraitCard>
+              <PotraitCard></PotraitCard>
+            </ScrollView>
+        </PortraitContainer>
+
+        <Text>Action</Text> 
+        <PortraitContainer >
+            <ScrollView horizontal={true}>
+              <PotraitCard></PotraitCard>
+              <PotraitCard></PotraitCard>
+              <PotraitCard></PotraitCard>
+            </ScrollView>
+        </PortraitContainer>
+
+        <Text>Comedy</Text> 
+        <PortraitContainer >
+            <ScrollView horizontal={true}>
+              <PotraitCard></PotraitCard>
+              <PotraitCard></PotraitCard>
+              <PotraitCard></PotraitCard>
+            </ScrollView>
+        </PortraitContainer>
+
       </ScrollView>
 
     </Main>
@@ -67,6 +96,22 @@ margin-left: 10px;
 const MovieContainer = styled.View`
 margin-top: 10px;
 margin-left: 0px;
+`;
+
+const PortraitContainer = styled.View`
+margin-top: 5px;
+margin-left: 0px;
+`;
+
+
+const Text = styled.Text`
+color: black;
+font-size: 12px;
+font-weight: 600;
+margin-top: 15px;
+margin-left: 5px;
+text-transform: uppercase;
+
 `;
 
 

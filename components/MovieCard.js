@@ -1,13 +1,12 @@
-import React from "react";
-import {Text, StyleSheet } from "react-native";
+import React, {useState} from "react";
 import styled from 'styled-components';
-  
 
 
-// export default function Hello() {
+// export default function MovieCard() {
 //   return (
-//       <Text style={styles.someText}>{this.props.name}</Text>
-
+//       <Container>
+//         <Image source={{ uri: this.props.image}} />
+//       </Container>
 //   );
 // }
 
