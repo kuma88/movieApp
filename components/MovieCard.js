@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import styled from 'styled-components';
+import {LinearGradient} from "expo-linear-gradient";
 
 
 // export default function MovieCard() {
@@ -16,6 +17,13 @@ export default class MovieCard extends React.Component {
         return (
           <Container>
             <Image source={{ uri: this.props.image}} />
+
+            <LinearGradient
+
+            colors = {["rgba(0, 0, 0, 0)", "rgba(255,0, 255, 0.7)"]} 
+
+            style={{ position: "absolute", width: "100%", height: "50%", marginTop: 130}}/>
+
           </Container>
 
         )
