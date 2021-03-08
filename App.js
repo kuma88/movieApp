@@ -1,8 +1,10 @@
 import React from "react";
-import {StatusBar, ScrollView} from "react-native";
+import {StatusBar, ScrollView, TouchableOpacity} from "react-native";
 import MovieCard from "./components/MovieCard";
 import styled from 'styled-components';
 import PotraitCard from "./components/PortraitCard";
+import { Ionicons } from "@expo/vector-icons"
+
 
 export default function App() {
   return (
@@ -11,6 +13,23 @@ export default function App() {
 
       <StatusBar hidden/>
       <Navbar>
+
+      <TouchableOpacity onPress={() => {
+
+        console.log("Menu Icon");
+
+      }}>
+        <Ionicons name="ios-menu" color="grey" size={40}
+
+          style={{
+            position: "absolute",
+            top: 10,
+            left: 10,
+
+          }}
+          />
+      </TouchableOpacity>
+
         <AppName>MovieApp</AppName>
         <Avatar/>
       </Navbar>
@@ -82,13 +101,14 @@ export default function App() {
 const Main = styled.View `
 flex : 1;
 background-color :lightgray;
-margin-top: 30px; 
+margin-top: 20px; 
 `;
 
 const Navbar = styled.View`
 background: white;
 width: 100%;
-height: 70px;
+height: 60px;
+
 `;
 
 const Avatar = styled.Image`
@@ -97,15 +117,15 @@ height: 50px;
 border-radius: 22px;
 background: black;
 position: absolute;
-top: 10px;
+top: 0px;
 right: 10px;
 `;
 
 const AppName = styled.Text`
 color: red;
-font-size: 30px;
-margin-top: 10px;
-margin-left: 10px;
+font-size: 25px;
+margin-top: 15px;
+margin-left: 60px;
 `;
 
 
