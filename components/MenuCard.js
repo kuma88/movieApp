@@ -1,7 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import styled from 'styled-components';
-import { Animated } from "react-native"
+import { Animated, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons"
 
 
 export default class Menucard extends React.Component {
@@ -15,6 +16,12 @@ export default class Menucard extends React.Component {
     componentDidMount() {
 
         Animated.spring(this.state.top, { toValue: 0}).start();
+
+    }
+
+    closeMenu = () => {
+
+        Animated.spring(this.state.top, { toValue: 900}).start();
 
     }
 
@@ -41,7 +48,29 @@ export default class Menucard extends React.Component {
                     />
 
                 </MenuCover>
-                
+
+                    <TouchableOpacity style={{
+
+                        position : "absolute",
+
+                        top: 125,
+
+                        left: "50%",
+
+                        marginLeft: -25
+                    }}
+                    
+                    onPress={this.closeMenu}
+                    >
+
+                        <CloseCard>
+
+                            <Ionicons name="ios-close" size={25}/>
+
+                        </CloseCard>
+
+                    </TouchableOpacity>
+                    
 
                 <MenuOptions/>
 
@@ -76,3 +105,21 @@ const MenuOptions = styled.View``;
 
 
 const AnimatedMenuContainter = Animated.createAnimatedComponent(MenuContainer);
+
+
+const CloseCard = styled.View`
+
+    width: 50px;
+
+    height: 50px;
+
+    border-radius: 22px;
+
+    background-color: grey;
+
+    justify-content: center;
+
+    align-items: center;
+
+
+`;
