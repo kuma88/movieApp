@@ -4,6 +4,7 @@ import MovieCard from "./components/MovieCard";
 import styled from 'styled-components';
 import PotraitCard from "./components/PortraitCard";
 import { Ionicons } from "@expo/vector-icons"
+import Menucard from "./components/MenuCard";
 
 
 export default function App() {
@@ -11,15 +12,19 @@ export default function App() {
 
     <Main>
 
-      <StatusBar hidden/>
-      <Navbar>
+      <Menucard></Menucard>
 
+      <StatusBar hidden/>
+
+      <Navbar>
       <TouchableOpacity onPress={() => {
 
         console.log("Menu Icon");
 
       }}>
-        <Ionicons name="ios-menu" color="grey" size={40}
+        <Ionicons name="ios-menu" 
+        
+          color="grey" size={40}
 
           style={{
             position: "absolute",
@@ -34,6 +39,8 @@ export default function App() {
         <Avatar/>
       </Navbar>
 
+      
+      
       <ScrollView showsVerticalScrollIndicator={false}>
         <MovieContainer>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
