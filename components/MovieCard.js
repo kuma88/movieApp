@@ -13,8 +13,11 @@ import {LinearGradient} from "expo-linear-gradient";
 
 
 export default class MovieCard extends React.Component {
+
     render() {
+
         return (
+          
           <Container>
             <Image source={{ uri: this.props.image}} />
 

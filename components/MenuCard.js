@@ -103,22 +103,16 @@ const MenuCover = styled.View`
 const MenuOptions = styled.View``;
 
 
-
 const AnimatedMenuContainter = Animated.createAnimatedComponent(MenuContainer);
 
 
 const CloseCard = styled.View`
 
     width: 50px;
-
     height: 50px;
-
     border-radius: 22px;
-
     background-color: grey;
-
     justify-content: center;
-
     align-items: center;
 
 
