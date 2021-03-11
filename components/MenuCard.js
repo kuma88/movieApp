@@ -2,10 +2,16 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import styled from 'styled-components';
 import { Animated, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons";
+import { connect } from "react-redux";
+
+function mapStateToProps(state) {
+
+    return { menu: state.menu};
+}
 
 
-export default class Menucard extends React.Component {
+class Menucard extends React.Component {
 
     state = {
 
@@ -15,18 +21,30 @@ export default class Menucard extends React.Component {
 
     componentDidMount() {
 
-        Animated.spring(this.state.top, { toValue: 0}).start();
+        if(this.props.menu == "openMenu"){
+
+            Animated.spring(this.state.top, { toValue: 0}).start();
+
+        }
+
+        if(this.props.menu == "closeMenu"){
+
+            Animated.spring(this.state.top, { toValue: 900}).start();
+                            
+        }
 
     }
 
-    closeMenu = () => {
+    // closeMenu = () => {
 
-        Animated.spring(this.state.top, { toValue: 900}).start();
+    //     Animated.spring(this.state.top, { toValue: 900}).start();
 
-    }
+
+    // }
 
     
     render() {
+        
         return (
 
             <AnimatedMenuContainter style={{ position: "absolute", top: this.state.top, zIndex:100 }}>
@@ -79,6 +97,8 @@ export default class Menucard extends React.Component {
         )
     }    
 }
+
+export default connect(mapStateToProps)(Menucard);
 
 
 const MenuContainer = styled.View`
