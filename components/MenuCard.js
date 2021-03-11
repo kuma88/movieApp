@@ -21,6 +21,18 @@ class Menucard extends React.Component {
 
     componentDidMount() {
 
+        this.menu();
+
+    }
+
+    componentDidUpdate() {
+
+        this.menu();
+    }
+
+
+    menu = () => {
+  
         if(this.props.menu == "openMenu"){
 
             Animated.spring(this.state.top, { toValue: 0}).start();
@@ -35,16 +47,9 @@ class Menucard extends React.Component {
 
     }
 
-    // closeMenu = () => {
-
-    //     Animated.spring(this.state.top, { toValue: 900}).start();
-
-
-    // }
-
     
     render() {
-        
+
         return (
 
             <AnimatedMenuContainter style={{ position: "absolute", top: this.state.top, zIndex:100 }}>
@@ -78,7 +83,7 @@ class Menucard extends React.Component {
                         marginLeft: -25
                     }}
                     
-                    onPress={this.closeMenu}
+                    onPress={this.menu}
                     >
 
                         <CloseCard>

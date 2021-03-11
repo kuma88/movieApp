@@ -5,104 +5,139 @@ import { Ionicons } from "@expo/vector-icons";
 import MovieCard from "../components/MovieCard";
 import PotraitCard from "../components/PortraitCard";
 import Menucard from "../components/MenuCard";
+import { connect } from "react-redux";
 
 
-export default function HomeScreen() {
-  return (
+function mapStateToProps(state) {
 
-    <Main>
-
-      <Menucard></Menucard>
-
-      <StatusBar hidden/>
-
-      <Navbar>
-      <TouchableOpacity onPress={() => {
-
-        console.log("Menu Icon");
-
-      }}>
-        <Ionicons name="ios-menu" 
-        
-          color="grey" size={40}
-
-          style={{
-            position: "absolute",
-            top: 10,
-            left: 10,
-
-          }}
-          />
-      </TouchableOpacity>
-
-        <AppName>MovieApp</AppName>
-        <Avatar/>
-      </Navbar>
-
-      
-      
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <MovieContainer>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {
-              MovieCardData.map((data, index) => {
-
-                return <MovieCard key={index} image={data.image}/>;
-
-              })
-            }
-
-          </ScrollView>
-        </MovieContainer>
-        <Text>Continue Watching</Text>   
-
-        <PortraitContainer >
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              {
-                PotraitCardData.map((data, index) => {
-
-                return <PotraitCard key={index} image={data.image}/>;
-
-                })
-
-              }
-            </ScrollView>
-        </PortraitContainer>
-
-        <Text>Action</Text> 
-        <PortraitContainer >
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              {
-                PotraitCardData.map((data, index) => {
-
-                return <PotraitCard key={index} image={data.image}/>;
-
-                })
-
-              }
-            </ScrollView>
-        </PortraitContainer>
-
-        <Text>Comedy</Text> 
-        <PortraitContainer >
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-            {
-                PotraitCardData.map((data, index) => {
-
-                return <PotraitCard key={index} image={data.image}/>;
-
-                })
-
-              }
-
-            </ScrollView>
-        </PortraitContainer>
-
-      </ScrollView>
-
-    </Main>
-  );
+    return { menu: state.menu};
 }
+
+function mapDispatchToProps(dispatch){
+
+    return { 
+        
+        openMenu: () => 
+        
+            dispatch({
+
+                type: "OPENMENU"
+            })
+    };
+}
+
+
+class HomeScreen extends React.Component {
+
+    render() {
+
+        return (
+
+            <Main>
+
+            <Menucard></Menucard>
+
+            <StatusBar hidden/>
+
+            <Navbar>
+            <TouchableOpacity onPress={this.props.openMenu}
+            
+
+
+            style={{
+                    position: "absolute",
+                    top: 10,
+                    left: 10,
+
+                }}
+            
+            >
+            
+                <Ionicons name="ios-menu" 
+                
+                color="grey" size={40}
+
+
+                />
+
+                
+            </TouchableOpacity>
+
+                <AppName>MovieApp</AppName>
+                <Avatar/>
+            </Navbar>
+
+            
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <MovieContainer>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {
+                    MovieCardData.map((data, index) => {
+
+                        return <MovieCard key={index} image={data.image}/>;
+
+                    })
+                    }
+
+                </ScrollView>
+                </MovieContainer>
+                <Text>Continue Watching</Text>   
+
+                <PortraitContainer >
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {
+                        PotraitCardData.map((data, index) => {
+
+                        return <PotraitCard key={index} image={data.image}/>;
+
+                        })
+
+                    }
+                    </ScrollView>
+                </PortraitContainer>
+
+                <Text>Action</Text> 
+                <PortraitContainer >
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {
+                        PotraitCardData.map((data, index) => {
+
+                        return <PotraitCard key={index} image={data.image}/>;
+
+                        })
+
+                    }
+                    </ScrollView>
+                </PortraitContainer>
+
+                <Text>Comedy</Text> 
+                <PortraitContainer >
+                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    {
+                        PotraitCardData.map((data, index) => {
+
+                        return <PotraitCard key={index} image={data.image}/>;
+
+                        })
+
+                    }
+
+                    </ScrollView>
+                </PortraitContainer>
+
+
+            </ScrollView>
+
+            </Main>
+        );
+    }
+}
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+
 
 
 const Main = styled.View `

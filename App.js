@@ -3,15 +3,13 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import HomeScreen from "./screens/HomeScreen";
 
-const reducer = (state = {
+const reducer = (state = { menu: "closeMenu"}, command) => {
 
-  menu: "closeMenu",
+  if (command.type == "OPENMENU") {
 
-  
+    return {menu: "openMenu"};
 
-}
-
-) => {
+  }
 
   return state;
 
