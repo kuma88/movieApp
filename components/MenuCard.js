@@ -3,13 +3,24 @@ import React from "react";
 import styled from 'styled-components';
 import { Animated, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { connect } from "react-redux";
+import { connect, dispatch } from "react-redux";
 
 function mapStateToProps(state) {
 
     return { menu: state.menu};
 }
 
+
+function mapDispatchToProps(dispatch) {
+
+    return { 
+
+        closeMenu: () => dispatch({
+
+            type: "CLOSEMENU"
+        })
+    }
+}
 
 class Menucard extends React.Component {
 
@@ -83,7 +94,7 @@ class Menucard extends React.Component {
                         marginLeft: -25
                     }}
                     
-                    onPress={this.menu}
+                    onPress={this.props.closeMenu}
                     >
 
                         <CloseCard>
@@ -103,7 +114,7 @@ class Menucard extends React.Component {
     }    
 }
 
-export default connect(mapStateToProps)(Menucard);
+export default connect(mapStateToProps, mapDispatchToProps)(Menucard);
 
 
 const MenuContainer = styled.View`

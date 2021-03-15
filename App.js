@@ -9,6 +9,10 @@ const reducer = (state = { menu: "closeMenu"}, command) => {
 
     return {menu: "openMenu"};
 
+  }else if (command.type == "CLOSEMENU") {
+
+    return {menu: "closeMenu"};
+
   }
 
   return state;
