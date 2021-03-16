@@ -1,9 +1,13 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import styled from 'styled-components';
-import { Animated, TouchableOpacity } from "react-native";
+import { Animated, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { connect, dispatch } from "react-redux";
+import { connect } from "react-redux";
+import MenuItem from "./MenuItem";
+
+
+const screenHeight = Dimensions.get("window").height;
 
 function mapStateToProps(state) {
 
@@ -26,7 +30,7 @@ class Menucard extends React.Component {
 
     state = {
 
-        top: new Animated.Value(900)
+        top: new Animated.Value(screenHeight)
 
     };
 
@@ -46,13 +50,13 @@ class Menucard extends React.Component {
   
         if(this.props.menu == "openMenu"){
 
-            Animated.spring(this.state.top, { toValue: 0}).start();
+            Animated.spring(this.state.top, { toValue: 100}).start();
 
         }
 
         if(this.props.menu == "closeMenu"){
 
-            Animated.spring(this.state.top, { toValue: 900}).start();
+            Animated.spring(this.state.top, { toValue: screenHeight}).start();
                             
         }
 
@@ -69,7 +73,7 @@ class Menucard extends React.Component {
 
                     <LinearGradient
                         
-                        colors = {["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 1),"]}
+                        colors = {["rgba(255, 255, 255, 0)", "rgba(0, 0, 0, 1),"]}
 
                         style = {{
 
@@ -81,9 +85,12 @@ class Menucard extends React.Component {
 
                     />
 
+                    <MenuTitle>Hello</MenuTitle>
+
                 </MenuCover>
 
-                    <TouchableOpacity style={{
+
+                <TouchableOpacity style={{
 
                         position : "absolute",
 
@@ -103,10 +110,15 @@ class Menucard extends React.Component {
 
                         </CloseCard>
 
-                    </TouchableOpacity>
-                    
+                </TouchableOpacity>
+                   
+                <MenuOptions>
 
-                <MenuOptions/>
+                    <MenuItem text="Account" icon="ios-settings" caption="Profile Settings"/>
+
+                    <MenuItem text="Log Out" icon="ios-log-out" caption="Are you sure?"/>
+
+                </MenuOptions>
 
             </AnimatedMenuContainter>
 
@@ -122,8 +134,9 @@ const MenuContainer = styled.View`
     width: 100%;
     height: 120%;
     background: white;
+    border-radius: 26px;
+    overflow: hidden;
 
-    
 `;
 
 
@@ -132,11 +145,27 @@ const MenuCover = styled.View`
     width: 100%;
     height: 150px;
 
+`;
+
+
+const MenuOptions = styled.View`
+
+    width: 100%;
+    height: 100%;
+    padding: 20px;
 
 `;
 
 
-const MenuOptions = styled.View``;
+const MenuTitle = styled.Text`
+    position: absolute;
+    font-size: 60px;
+    font-weight: 500;
+    color: white;
+    top: 60;
+    left: 20;
+
+`;
 
 
 const AnimatedMenuContainter = Animated.createAnimatedComponent(MenuContainer);
