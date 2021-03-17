@@ -1,5 +1,5 @@
 import React from "react";
-import {StatusBar, ScrollView, TouchableOpacity} from "react-native";
+import {StatusBar, ScrollView, TouchableOpacity, Animated, Dimensions} from "react-native";
 import styled from 'styled-components';
 import { Ionicons } from "@expo/vector-icons";
 import MovieCard from "../components/MovieCard";
@@ -7,6 +7,7 @@ import PotraitCard from "../components/PortraitCard";
 import Menucard from "../components/MenuCard";
 import { connect } from "react-redux";
 
+const screenHeight = Dimensions.get("window").height;
 
 function mapStateToProps(state) {
 
@@ -29,13 +30,39 @@ function mapDispatchToProps(dispatch){
 
 class HomeScreen extends React.Component {
 
+    state = {
+      
+      top: new Animated.Value(screenHeight),
+
+      opacity: new Animated.Value(0)
+
+    }
+
+    componentDidUpdate(){
+      this.changeBackgroundColor()
+    }
+
+    changeBackgroundColor(){
+
+      if (this.props.menu == "openMenu") {
+        Animated.timing(this.state.top, { toValue:0, duration: 10 }).start();
+        Animated.timing(this.state.opacity, { toValue:0.8, duration: 100 }).start();
+      }
+
+
+      if (this.props.menu == "closeMenu") {
+        Animated.timing(this.state.top, { toValue:screenHeight, duration: 10  }).start();
+        Animated.spring(this.state.opacity, { toValue:0}).start();
+      }
+    }
+
     render() {
 
         return (
 
-            <Main>
+          <Body>
 
-            <Menucard></Menucard>
+            <Main>
 
             <StatusBar hidden/>
 
@@ -126,10 +153,15 @@ class HomeScreen extends React.Component {
                     </ScrollView>
                 </PortraitContainer>
 
-
             </ScrollView>
 
             </Main>
+
+            <AnimatedBackground style={{ top:this.state.top, opacity: this.state.opacity}} ></AnimatedBackground>
+
+            <Menucard></Menucard>
+
+          </Body>
         );
     }
 }
@@ -138,13 +170,26 @@ class HomeScreen extends React.Component {
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
-
+const Body = styled.View `
+flex : 1;
+`;
 
 const Main = styled.View `
 flex : 1;
 background-color :lightgray;
 margin-top: 20px; 
 `;
+
+const ChangeBackground = styled.View`
+background:black;
+position: absolute;
+width: 100%;
+height: 100%;
+opacity: 0.5;
+`;
+
+const AnimatedBackground = Animated.createAnimatedComponent(ChangeBackground);
+
 
 const Navbar = styled.View`
 background: white;

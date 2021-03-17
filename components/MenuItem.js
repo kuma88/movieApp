@@ -18,7 +18,6 @@ const MenuItem = props => (
         </Contentview>
 
 
-
     </Container>
 )
 
