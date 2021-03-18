@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-export default function FakeScreen() {
+export default function TvScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.paragraph}>
-        DummyScreen
+        Television
       </Text>
-
     </View>
   );
 }

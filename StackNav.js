@@ -3,8 +3,11 @@ import {createAppContainer} from "react-navigation";
 import {createBottomTabNavigator} from "react-navigation-tabs";
 import {createStackNavigator} from "react-navigation-stack";
 import HomeScreen from "./screens/HomeScreen";
-import FakeScreen from "./screens/FakeScreen";
+import VideoScreen from "./screens/VideoScreen";
 import PlayerScreen from "./screens/PlayerScreen";
+import TvScreen from "./screens/TvScreen";
+import { Ionicons } from "@expo/vector-icons";
+
 
 
 const HomeStack = createStackNavigator({
@@ -15,17 +18,50 @@ const HomeStack = createStackNavigator({
 
 });
 
+HomeStack.navigationOptions = {
+    tabBarLabel: "Home",
 
-const FakeStack = createStackNavigator({
+    tabBarIcon: ({ focused }) => (
+        <Ionicons name="ios-home" size={20} color={focused ? "blue" : "black"}/>
+    )
+}
+
+
+const VideoStack = createStackNavigator({
     
     Home: {
-        screen: FakeScreen,
+        screen: VideoScreen,
     }
 
 });
 
+VideoStack.navigationOptions = {
+    tabBarLabel: "Movies",
 
-const BottomTab = createBottomTabNavigator({ HomeStack, FakeStack })
+    tabBarIcon: ({ focused }) => (
+        <Ionicons name="ios-film" size={20} color={focused ? "blue" : "black"}/>
+    )
+}
+
+const TvStack = createStackNavigator({
+    
+    Home: {
+        screen: TvScreen,
+    }
+
+});
+
+TvStack.navigationOptions = {
+    tabBarLabel: "TV",
+
+    tabBarIcon: ({ focused }) => (
+        <Ionicons name="ios-tv" size={20} color={focused ? "blue" : "black"}/>
+    )
+
+}
+
+
+const BottomTab = createBottomTabNavigator({ HomeStack, VideoStack, TvStack  })
 
 
 

@@ -31,143 +31,149 @@ function mapDispatchToProps(dispatch){
 
 class HomeScreen extends React.Component {
 
-    state = {
-      
-      top: new Animated.Value(screenHeight),
+  static navigationOptions = {
 
-      opacity: new Animated.Value(0)
+    header: null
 
+  };
+
+  state = {
+    
+    top: new Animated.Value(screenHeight),
+
+    opacity: new Animated.Value(0)
+
+  }
+
+  componentDidUpdate(){
+    this.changeBackgroundColor()
+  }
+
+  changeBackgroundColor(){
+
+    if (this.props.menu == "openMenu") {
+      Animated.timing(this.state.top, { toValue:0, duration: 10 }).start();
+      Animated.timing(this.state.opacity, { toValue:0.8, duration: 100 }).start();
     }
 
-    componentDidUpdate(){
-      this.changeBackgroundColor()
+
+    if (this.props.menu == "closeMenu") {
+      Animated.timing(this.state.top, { toValue:screenHeight, duration: 10  }).start();
+      Animated.spring(this.state.opacity, { toValue:0}).start();
     }
+  }
 
-    changeBackgroundColor(){
+  render() {
 
-      if (this.props.menu == "openMenu") {
-        Animated.timing(this.state.top, { toValue:0, duration: 10 }).start();
-        Animated.timing(this.state.opacity, { toValue:0.8, duration: 100 }).start();
-      }
+      return (
 
+        <Body>
 
-      if (this.props.menu == "closeMenu") {
-        Animated.timing(this.state.top, { toValue:screenHeight, duration: 10  }).start();
-        Animated.spring(this.state.opacity, { toValue:0}).start();
-      }
-    }
+          <Main>
 
-    render() {
+          <StatusBar hidden/>
 
-        return (
-
-          <Body>
-
-            <Main>
-
-            <StatusBar hidden/>
-
-            <Navbar>
-              <TouchableOpacity onPress={this.props.openMenu}
-              
-              style={{
-                      position: "absolute",
-                      top: 10,
-                      left: 10,
-
-                  }}
-              
-              >
-              
-                  <Ionicons name="ios-menu" 
-                  
-                  color="grey" size={40}
-
-
-                  />
-                  
-              </TouchableOpacity>
-
-              <AppName>MovieApp</AppName>
-              <Avatar/>
-            </Navbar>
-
+          <Navbar>
+            <TouchableOpacity onPress={this.props.openMenu}
             
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <MovieContainer>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {
-                    MovieCardData.map((data, index) => {
+            style={{
+                    position: "absolute",
+                    top: 30,
+                    left: 10,
 
-                        return <MovieCard key={index} image={data.image}/>;
+                }}
+            
+            >
+            
+                <Ionicons name="ios-menu" 
+                
+                color="grey" size={40}
 
-                    })
-                    }
 
-                </ScrollView>
-                </MovieContainer>
-                <Text>Continue Watching</Text>   
+                />
+                
+            </TouchableOpacity>
 
-                <PortraitContainer >
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {
-                        PotraitCardData.map((data, index) => {
+            <AppName>MovieApp</AppName>
+            <Avatar/>
+          </Navbar>
 
-                        return <PotraitCard key={index} image={data.image}/>;
+          
+          <ScrollView showsVerticalScrollIndicator={false}>
+              <MovieContainer>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                  {
+                  MovieCardData.map((data, index) => {
 
-                        })
+                      return <MovieCard key={index} image={data.image}/>;
 
-                    }
-                    </ScrollView>
-                </PortraitContainer>
+                  })
+                  }
 
-                <Text>Action</Text> 
-                <PortraitContainer >
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {
-                        PotraitCardData.map((data, index) => {
+              </ScrollView>
+              </MovieContainer>
+              <Text>Continue Watching</Text>   
 
-                        return <PotraitCard key={index} image={data.image}/>;
+              <PortraitContainer >
+                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                  {
+                      PotraitCardData.map((data, index) => {
 
-                        })
+                      return <PotraitCard key={index} image={data.image}/>;
 
-                    }
-                    </ScrollView>
-                </PortraitContainer>
+                      })
 
-                <Text>Comedy</Text> 
-                <PortraitContainer >
-                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    
-                    {
-                        PotraitCardData.map((data, index) => {
+                  }
+                  </ScrollView>
+              </PortraitContainer>
 
-                        return (
+              <Text>Action</Text> 
+              <PortraitContainer >
+                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                  {
+                      PotraitCardData.map((data, index) => {
 
-                          <TouchableOpacity key={index} onPress={() => {this.props.navigation.push("Player");}}>
+                      return <PotraitCard key={index} image={data.image}/>;
 
-                            <PotraitCard image={data.image}/>
+                      })
 
-                          </TouchableOpacity>
+                  }
+                  </ScrollView>
+              </PortraitContainer>
 
-                        )})
+              <Text>Comedy</Text> 
+              <PortraitContainer >
+                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                  
+                  {
+                      PotraitCardData.map((data, index) => {
 
-                    }
+                      return (
 
-                    </ScrollView>
-                </PortraitContainer>
+                        <TouchableOpacity key={index} onPress={() => {this.props.navigation.push("Player");}}>
 
-            </ScrollView>
+                          <PotraitCard image={data.image}/>
 
-            </Main>
+                        </TouchableOpacity>
 
-            <AnimatedBackground style={{ top:this.state.top, opacity: this.state.opacity}} ></AnimatedBackground>
+                      )})
 
-            <Menucard></Menucard>
+                  }
 
-          </Body>
-        );
-    }
+                  </ScrollView>
+              </PortraitContainer>
+
+          </ScrollView>
+
+          </Main>
+
+          <AnimatedBackground style={{ top:this.state.top, opacity: this.state.opacity}} ></AnimatedBackground>
+
+          <Menucard></Menucard>
+
+        </Body>
+      );
+  }
 }
 
 
@@ -198,7 +204,7 @@ const AnimatedBackground = Animated.createAnimatedComponent(ChangeBackground);
 const Navbar = styled.View`
 background: white;
 width: 100%;
-height: 60px;
+height: 80px;
 
 `;
 
@@ -208,14 +214,14 @@ height: 50px;
 border-radius: 22px;
 background: black;
 position: absolute;
-top:5px;
+top:20px;
 right: 10px;
 `;
 
 const AppName = styled.Text`
 color: red;
 font-size: 25px;
-margin-top: 15px;
+margin-top: 35px;
 margin-left: 60px;
 `;
 
