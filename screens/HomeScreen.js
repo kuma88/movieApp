@@ -68,34 +68,30 @@ class HomeScreen extends React.Component {
             <StatusBar hidden/>
 
             <Navbar>
-            <TouchableOpacity onPress={this.props.openMenu}
-            
+              <TouchableOpacity onPress={this.props.openMenu}
+              
+              style={{
+                      position: "absolute",
+                      top: 10,
+                      left: 10,
+
+                  }}
+              
+              >
+              
+                  <Ionicons name="ios-menu" 
+                  
+                  color="grey" size={40}
 
 
-            style={{
-                    position: "absolute",
-                    top: 10,
-                    left: 10,
+                  />
+                  
+              </TouchableOpacity>
 
-                }}
-            
-            >
-            
-                <Ionicons name="ios-menu" 
-                
-                color="grey" size={40}
-
-
-                />
-
-                
-            </TouchableOpacity>
-
-                <AppName>MovieApp</AppName>
-                <Avatar/>
+              <AppName>MovieApp</AppName>
+              <Avatar/>
             </Navbar>
 
-            
             
             <ScrollView showsVerticalScrollIndicator={false}>
                 <MovieContainer>
@@ -142,6 +138,7 @@ class HomeScreen extends React.Component {
                 <Text>Comedy</Text> 
                 <PortraitContainer >
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    
                     {
                         PotraitCardData.map((data, index) => {
 
@@ -178,7 +175,7 @@ flex : 1;
 const Main = styled.View `
 flex : 1;
 background-color :lightgray;
-margin-top: 20px; 
+margin-top: 0px; 
 `;
 
 const ChangeBackground = styled.View`
@@ -205,7 +202,7 @@ height: 50px;
 border-radius: 22px;
 background: black;
 position: absolute;
-top: 0px;
+top:5px;
 right: 10px;
 `;
 
