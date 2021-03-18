@@ -1,7 +1,10 @@
 import React from "react";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import HomeScreen from "./screens/HomeScreen";
+import BottomTab from "./StackNav";
+//import HomeScreen from "./screens/HomeScreen";
+
+
 
 const reducer = (state = { menu: "closeMenu"}, command) => {
 
@@ -27,12 +30,9 @@ export default function App() {
 
     <Provider store={database}>
 
-          <HomeScreen/>
+          <BottomTab/>
 
     </Provider>
-
-
-
 
  );
 }
