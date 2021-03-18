@@ -142,9 +142,15 @@ class HomeScreen extends React.Component {
                     {
                         PotraitCardData.map((data, index) => {
 
-                        return <PotraitCard key={index} image={data.image}/>;
+                        return (
 
-                        })
+                          <TouchableOpacity key={index} onPress={() => {this.props.navigation.push("Player");}}>
+
+                            <PotraitCard image={data.image}/>
+
+                          </TouchableOpacity>
+
+                        )})
 
                     }
 
