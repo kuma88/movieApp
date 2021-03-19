@@ -1,27 +1,44 @@
-import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React from "react";
 
-export default function PlayerScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.paragraph}>
-        PlayerScreen
-      </Text>
-    </View>
-  );
+import styled from "styled-components";
+
+import { TouchableOpacity } from "react-native";
+
+
+
+class PlayerScreen extends React.Component {
+
+   render() {
+
+    const { navigation } = this.props;
+
+    const video = navigation.getParam("video");
+
+    return (
+      <Container>
+        <Text>{video.title}</Text>
+      </Container>
+
+    );
+
+   }
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
-    padding: 8,
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-});
+export default PlayerScreen;
+
+const Container = styled.View`
+  
+  flex: 1;
+
+  align-items: center;
+
+  justify-content: center;
+
+`;
+
+const Text = styled.Text`
+color: black;
+font-size: 12px;
+font-weight: 600;
+`;
