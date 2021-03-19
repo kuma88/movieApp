@@ -292,7 +292,7 @@ const PotraitCardData = [
   {
     image: "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/320w/products/89347/94605/The-Dark-Knight-Final-Style-Bat-Logo-on-fire-Double-sided-original-movie-poster-buy-now-at-starstills__20500.1599750099.jpg?c=2",
 
-    title: "EP1"
+    title: "React Native Course Video 1.1"
   },
   {
     image: "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/320w/products/89385/94697/Mulan-double-sided-original-movie-poster-buy-now-at-starstills__05117.1601565118.jpg?c=2",
