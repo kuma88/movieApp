@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
+const firebaseApp = !firebase.apps.length ? firebase.initializeApp(firebaseConfig) : firebase.app();
 
 
 const screenHeight = Dimensions.get("window").height;
@@ -67,7 +67,7 @@ class HomeScreen extends React.Component {
         cardData.push({
 
           title: child.val().title,
-
+  
           image: child.val().image
         });
 
