@@ -50,14 +50,14 @@ class Menucard extends React.Component {
   
         if(this.props.menu == "openMenu"){
 
-            Animated.spring(this.state.top, { toValue: 100}).start();
+            Animated.spring(this.state.top, { toValue: 100, useNativeDriver: false }).start();
 
         }
 
         if(this.props.menu == "closeMenu"){
 
-            Animated.spring(this.state.top, { toValue: screenHeight}).start();
-                            
+            Animated.spring(this.state.top, { toValue: screenHeight, useNativeDriver: false }).start();
+                             
         }
 
     }
@@ -67,7 +67,7 @@ class Menucard extends React.Component {
 
         return (
 
-            <AnimatedMenuContainter style={{ position: "absolute", top: this.state.top, zIndex:100 }}>
+            <AnimatedMenuContainter style={{ position: "absolute", top: this.state.top, zIndex:100, useNativeDriver: false }}>
 
                 <MenuCover>
 
@@ -162,8 +162,8 @@ const MenuTitle = styled.Text`
     font-size: 60px;
     font-weight: 500;
     color: white;
-    top: 60;
-    left: 20;
+    top: 60px;
+    left: 20px;
 
 `;
 

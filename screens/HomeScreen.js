@@ -6,6 +6,18 @@ import MovieCard from "../components/MovieCard";
 import PotraitCard from "../components/PortraitCard";
 import Menucard from "../components/MenuCard";
 import { connect } from "react-redux";
+import * as firebase from "firebase";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDmT6zSYylTrwNpBh2P6WLesCGTuh8uMmY",
+  authDomain: "reactmediaapp-de0bc.firebaseapp.com",
+  databaseURL: "https://reactmediaapp-de0bc-default-rtdb.firebaseio.com",
+  projectId: "reactmediaapp-de0bc",
+  storageBucket: "reactmediaapp-de0bc.appspot.com",
+
+};
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 
 const screenHeight = Dimensions.get("window").height;
@@ -33,7 +45,7 @@ class HomeScreen extends React.Component {
 
   static navigationOptions = {
 
-    header: null
+    headerShown: false
 
   };
 
@@ -45,6 +57,29 @@ class HomeScreen extends React.Component {
 
   }
 
+  componentDidMount(){
+    this.database = firebaseApp.database().ref().child("PotraitCardData");
+    this.database.on("value", snap => {
+
+    let cardData = [];
+
+      snap.forEach(child => {
+        cardData.push({
+
+          title: child.val().title,
+
+          image: child.val().image
+        });
+
+      });
+
+    console.log(cardData)
+
+    })
+
+
+  }
+
   componentDidUpdate(){
     this.changeBackgroundColor()
   }
@@ -52,14 +87,14 @@ class HomeScreen extends React.Component {
   changeBackgroundColor(){
 
     if (this.props.menu == "openMenu") {
-      Animated.timing(this.state.top, { toValue:0, duration: 10 }).start();
-      Animated.timing(this.state.opacity, { toValue:0.8, duration: 100 }).start();
+      Animated.timing(this.state.top, { toValue:0, duration: 10, useNativeDriver: false }).start();
+      Animated.timing(this.state.opacity, { toValue:0.8, duration: 100, useNativeDriver: false }).start();
     }
 
 
     if (this.props.menu == "closeMenu") {
-      Animated.timing(this.state.top, { toValue:screenHeight, duration: 10  }).start();
-      Animated.spring(this.state.opacity, { toValue:0}).start();
+      Animated.timing(this.state.top, { toValue:screenHeight, duration: 10, useNativeDriver: false  }).start();
+      Animated.spring(this.state.opacity, { toValue:0, useNativeDriver: false}).start();
     }
   }
 
@@ -94,7 +129,7 @@ class HomeScreen extends React.Component {
                 
             </TouchableOpacity>
 
-            <AppName>MovieApp</AppName>
+            <AppName>App Development</AppName>
             <Avatar/>
           </Navbar>
 
@@ -112,14 +147,15 @@ class HomeScreen extends React.Component {
 
               </ScrollView>
               </MovieContainer>
-              <Text>Continue Watching</Text>   
+
+              <Text>PC WEB Series</Text>   
 
               <PortraitContainer >
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                   {
                       PotraitCardData.map((data, index) => {
 
-                      return <PotraitCard key={index} image={data.image}/>;
+                      return <PotraitCard key={index} image={data.image} title={data.title}/>;
 
                       })
 
@@ -127,21 +163,9 @@ class HomeScreen extends React.Component {
                   </ScrollView>
               </PortraitContainer>
 
-              <Text>Action</Text> 
-              <PortraitContainer >
-                  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                  {
-                      PotraitCardData.map((data, index) => {
 
-                      return <PotraitCard key={index} image={data.image}/>;
+              <Text>PC MOB Series</Text> 
 
-                      })
-
-                  }
-                  </ScrollView>
-              </PortraitContainer>
-
-              <Text>Comedy</Text> 
               <PortraitContainer >
                   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                   
@@ -152,13 +176,15 @@ class HomeScreen extends React.Component {
 
                         <TouchableOpacity key={index} onPress={() => {this.props.navigation.push("Player", {
                           
-                            video: data
+                            video: data,
+
+                            categories: PotraitCardData
 
                           });
                         
                         }}>
 
-                          <PotraitCard image={data.image}/>
+                          <PotraitCard image={data.image} title={data.title}/>
 
                         </TouchableOpacity>
 
@@ -211,7 +237,6 @@ const Navbar = styled.View`
 background: white;
 width: 100%;
 height: 80px;
-
 `;
 
 const Avatar = styled.Image`
@@ -250,38 +275,42 @@ font-weight: 600;
 margin-top: 15px;
 margin-left: 5px;
 text-transform: uppercase;
-
 `;
 
 
 const MovieCardData = [
   {
-    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB2.JPG?alt=media&token=013e7ef5-4e4a-478a-8a90-b4910e973161",
 
     title: "Movie1"
   },
   {
-    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB3.JPG?alt=media&token=82d537f7-bb4d-4609-8459-74dc0464f908",
 
     title: "Movie2"
   },
   {
-    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB4.JPG?alt=media&token=a3ddff70-464f-4f29-a3be-4f5b6497ccd8",
 
     title: "Movie3"
   },
   {
-    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB5.JPG?alt=media&token=5ff06431-cae4-475d-ad83-ecd0f1190a4a",
 
     title: "Movie4"
   },
   {
-    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB5.JPG?alt=media&token=5ff06431-cae4-475d-ad83-ecd0f1190a4a",
 
     title: "Movie5"
   },
   {
-    image: "https://mir-s3-cdn-cf.behance.net/projects/202/c5724d58808319.Y3JvcCw4MDgsNjMyLDAsMA.jpg",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB6.JPG?alt=media&token=5fdd1a4d-e3af-4c6e-a644-01ad6c42e76f",
+
+    title: "Movie6"
+  },
+  {
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB6B.JPG?alt=media&token=48757389-b418-4b7b-ad2e-125a03e55e50",
 
     title: "Movie6"
   },
@@ -290,29 +319,39 @@ const MovieCardData = [
 
 const PotraitCardData = [
   {
-    image: "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/320w/products/89347/94605/The-Dark-Knight-Final-Style-Bat-Logo-on-fire-Double-sided-original-movie-poster-buy-now-at-starstills__20500.1599750099.jpg?c=2",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB2.JPG?alt=media&token=013e7ef5-4e4a-478a-8a90-b4910e973161",
 
-    title: "React Native Course Video 1.1"
+    title: "EP1"
   },
   {
-    image: "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/320w/products/89385/94697/Mulan-double-sided-original-movie-poster-buy-now-at-starstills__05117.1601565118.jpg?c=2",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB3.JPG?alt=media&token=82d537f7-bb4d-4609-8459-74dc0464f908",
 
     title: "EP2"
   },
   {
-    image: "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/320w/products/89383/94693/Django-Unchained-International-Style-poster-buy-original-movie-posters-at-starstills__19377.1601564325.jpg?c=2",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB4.JPG?alt=media&token=a3ddff70-464f-4f29-a3be-4f5b6497ccd8",
 
     title: "EP3"
   },
   {
-    image: "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/320w/products/86734/86287/pain_and_gain_poster_buy_original_movie_posters_at_starstills__45691__92167.1394515537.jpg?c=2",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB5.JPG?alt=media&token=5ff06431-cae4-475d-ad83-ecd0f1190a4a",
 
     title: "EP4"
   },
   {
-    image: "https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/320w/products/86599/86152/monsters_inc_3d_poster_buy_original_movie_posters_at_starstills__73080__44859.1394515416.jpg?c=2",
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB6.JPG?alt=media&token=5fdd1a4d-e3af-4c6e-a644-01ad6c42e76f",
 
     title: "EP5"
+  },
+  {
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB6B.JPG?alt=media&token=48757389-b418-4b7b-ad2e-125a03e55e50",
+
+    title: "EP6"
+  },
+  {
+    image: "https://firebasestorage.googleapis.com/v0/b/reactmediaapp-de0bc.appspot.com/o/PCWEB7.JPG?alt=media&token=a77ca817-247f-42e8-a89b-53891a42574f",
+
+    title: "EP7"
   },
 
 ]

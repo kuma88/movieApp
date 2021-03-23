@@ -17,7 +17,6 @@ const MenuItem = props => (
             <MenuText>{props.caption}</MenuText>
         </Contentview>
 
-
     </Container>
 )
 
@@ -25,11 +24,11 @@ const MenuItem = props => (
 export default MenuItem;
 
 
+
 const Container = styled.View`
     flex-direction: row;
     align-items: center;
     margin: 15px 0;
-    
 `;
 
 const Iconview = styled.View`
@@ -39,22 +38,18 @@ const Iconview = styled.View`
     align-items: center;
 `;
 
-
 const Contentview = styled.View`
     padding-left: 25px;
-
 `;
 
 const MenuButton = styled.Text`
     font-size: 40px;
     font-weight: 500;
     color: black;
-    margin-top: 30;
-
+    margin-top: 30px;
 `;
 
 const MenuText = styled.Text`
     font-size: 20px;
     color: black;
-
 `;

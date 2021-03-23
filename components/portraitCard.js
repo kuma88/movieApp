@@ -17,7 +17,7 @@ export default class PotraitCard extends React.Component {
 
             <LinearGradient
 
-              colors = {["rgba(0, 0, 0, 0.0)", "rgba(0, 0, 0, 0.9)"]} 
+              colors = {["rgba(0, 0, 0, 0.3)", "rgba(0, 0, 0, 1)"]} 
               
               style={{ position: "absolute", width: "100%", height: "60%", marginTop: 120}}/>
 
@@ -26,7 +26,7 @@ export default class PotraitCard extends React.Component {
 
               <Ionicons name="ios-play" color="white" size={10}/>
 
-              <PotraitCardText>S1 E02</PotraitCardText>
+              <PotraitCardText>{this.props.title}</PotraitCardText>
 
             </PotraitCardTextContainer>
 

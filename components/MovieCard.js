@@ -23,7 +23,7 @@ export default class MovieCard extends React.Component {
 
             <LinearGradient
 
-            colors = {["rgba(0, 0, 0, 0)", "rgba(255,0, 255, 0.7)"]} 
+            colors = {["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.7)"]} 
 
             style={{ position: "absolute", width: "100%", height: "50%", marginTop: 130}}/>
 
